@@ -20,7 +20,7 @@ const { Content } = await render(article);
       <h1>{article.data.title}</h1>
       <p class="muted">
         {article.data.pubDate.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
-        {article.data.sourceName && ` · Source: ${article.data.sourceName}`}
+        {article.data.sourceName && ` Â· Source: ${article.data.sourceName}`}
       </p>
     </header>
 
