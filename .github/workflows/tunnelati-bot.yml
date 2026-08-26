@@ -1,0 +1,68 @@
+﻿name: Tunnelati bot
+
+on:
+  schedule:
+    - cron: "0 7,19 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: bot/requirements.txt
+
+      - name: Install bot dependencies
+        working-directory: bot
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Tunnelati bot
+        working-directory: bot
+        env:
+          LIVE_MODE: "true"
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          LOG_LEVEL: INFO
+        run: python main.py
+
+      - name: Open PR with new content (if any)
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Bot: new high-signal The Boring Company articles"
+          title: "Bot: new high-signal The Boring Company articles"
+          body: |
+            Automated draft from the Tunnelati bot.
+
+            **Review before merge:**
+            - Accuracy and attribution look correct
+            - Categories are sensible
+            - Images (if any) are real source media
+
+            Processed-post memory is updated in `bot/state/processed.json`.
+          branch: bot/content-updates
+          delete-branch: true
+          add-paths: |
+            website/src/content/articles
+            website/public/images/articles
+            bot/state/processed.json
+          labels: |
+            bot
+            content
