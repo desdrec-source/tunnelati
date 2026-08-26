@@ -20,52 +20,64 @@ for (const a of others) {
   byCategory[cat].push(a);
 }
 
-const catClass = {
-  "Vegas Loop": "cat-vegas",
-  "Nashville": "cat-nashville",
-  "Machines": "cat-machines",
-  "Projects": "cat-projects",
-  "Company": "cat-company",
+const catSlug = {
+  "Vegas Loop": "vegas",
+  "Nashville": "nashville",
+  "Machines": "machines",
+  "Projects": "projects",
+  "Company": "company",
 };
 ---
 <BaseLayout title="Home" description="Independent high-signal coverage of official The Boring Company developments.">
-  <h1 class="section-title" style="margin-top: 2rem;">Latest</h1>
-  <p class="muted">Official sources only. Last 30 days.</p>
-
-  {featured && (
-    <div class="card featured" style="margin-top: 1.5rem;">
-      <span class="card-category">{featured.data.category}</span>
-      <h2><a href={`/articles/${featured.id}`}>{featured.data.title}</a></h2>
-      <p>{featured.data.description}</p>
-      <div class="card-meta">
-        {featured.data.pubDate.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
-        {featured.data.sourceName && ` · ${featured.data.sourceName}`}
-      </div>
+  <div class="main">
+    <div class="home-hero">
+      <span class="home-kicker">The Boring Company news</span>
+      <h1 class="page-title">Latest updates</h1>
+      <p class="page-subtitle">Focused coverage of official announcements and high-signal developments.</p>
     </div>
-  )}
 
-  {Object.entries(byCategory).map(([cat, items]) => (
-    <div class={catClass[cat] || ""}>
-      <div class="cat-header">
-        <span class="dot"></span>
-        <span>{cat}</span>
-      </div>
-      <div class="card-grid">
-        {items.map(a => (
-          <article class="card">
-            <span class="card-category">{a.data.category}</span>
-            <h2><a href={`/articles/${a.id}`}>{a.data.title}</a></h2>
-            <p>{a.data.description}</p>
-            <div class="card-meta">
-              {a.data.pubDate.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  ))}
+    {featured && (
+      <section class="featured-section">
+        <div class="featured-label">Featured</div>
+        <a href={`/articles/${featured.id}`} class="featured-card">
+          <div class="featured-meta">
+            <span>{featured.data.pubDate.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</span>
+            <span class="featured-cat">{featured.data.category}</span>
+          </div>
+          <h2 class="featured-title">{featured.data.title}</h2>
+          <p class="featured-desc">{featured.data.description}</p>
+          {featured.data.sourceName && (
+            <p class="featured-source">Source: {featured.data.sourceName}</p>
+          )}
+        </a>
+      </section>
+    )}
 
-  {recent.length === 0 && (
-    <p style="margin-top: 2rem;" class="muted">No articles in the last 30 days yet.</p>
-  )}
+    {Object.entries(byCategory).map(([cat, items]) => (
+      <section class={`category-section cat-${catSlug[cat] || "vegas"}`}>
+        <div class="category-header">
+          <h2 class="category-title">{cat}</h2>
+        </div>
+        <div class="articles-grid">
+          {items.map(a => (
+            <article class="article-card">
+              <a href={`/articles/${a.id}`}>
+                <div class="card-meta-row">
+                  <span class={`card-category cat-${catSlug[a.data.category] || "vegas"}`}>{a.data.category}</span>
+                  <span class="card-date">{a.data.pubDate.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</span>
+                </div>
+                <h3 class="card-title">{a.data.title}</h3>
+                <p class="card-desc">{a.data.description}</p>
+                {a.data.sourceName && <p class="card-source">Source: {a.data.sourceName}</p>}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    {recent.length === 0 && (
+      <p class="muted">No articles in the last 30 days yet.</p>
+    )}
+  </div>
 </BaseLayout>
