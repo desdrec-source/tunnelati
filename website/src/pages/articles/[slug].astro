@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  return articles.map(a => ({
+    params: { slug: a.id },
+    props: { article: a },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+<BaseLayout title={article.data.title} description={article.data.description}>
+  <article>
+    <header class="article-header">
+      <span class="card-category">{article.data.category}</span>
+      <h1>{article.data.title}</h1>
+      <p class="muted">
+        {article.data.pubDate.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+        {article.data.sourceName && ` · Source: ${article.data.sourceName}`}
+      </p>
+    </header>
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    {(article.data.sourceUrl || article.data.sourceName) && (
+      <div class="source-box">
+        <strong>Source</strong><br />
+        {article.data.sourceName && <span>{article.data.sourceName}</span>}
+        {article.data.sourceUrl && (
+          <><br /><a href={article.data.sourceUrl} target="_blank" rel="noopener">{article.data.sourceUrl}</a></>
+        )}
+      </div>
+    )}
+  </article>
+</BaseLayout>
