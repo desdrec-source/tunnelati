@@ -8,6 +8,11 @@
   --accent-gold: #f59e0b;
   --border: #1e293b;
   --radius: 12px;
+  --cat-vegas: #3b82f6;
+  --cat-nashville: #a855f7;
+  --cat-machines: #22c55e;
+  --cat-projects: #f97316;
+  --cat-company: #eab308;
 }
 
 * {
@@ -82,9 +87,9 @@ a:hover {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.25rem;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
 }
 .card {
   background: var(--bg-card);
@@ -99,19 +104,23 @@ a:hover {
 }
 .card.featured {
   border-color: var(--accent-gold);
-  background: linear-gradient(145deg, #1a1608 0%, var(--bg-card) 100%);
+  background: linear-gradient(145deg, #1a1608 0%, var(--bg-card) 60%);
+  grid-column: 1 / -1;
 }
 .card-category {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--accent);
+  letter-spacing: 0.05em;
   margin-bottom: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent);
 }
 .card h2 {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.35;
   margin-bottom: 0.5rem;
 }
@@ -120,13 +129,39 @@ a:hover {
 }
 .card p {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 .card-meta {
   margin-top: 0.85rem;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
 }
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2.75rem 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.cat-header .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.cat-vegas .dot { background: var(--cat-vegas); }
+.cat-nashville .dot { background: var(--cat-nashville); }
+.cat-machines .dot { background: var(--cat-machines); }
+.cat-projects .dot { background: var(--cat-projects); }
+.cat-company .dot { background: var(--cat-company); }
+
+.cat-vegas .card-category { color: var(--cat-vegas); background: rgba(59,130,246,0.15); }
+.cat-nashville .card-category { color: var(--cat-nashville); background: rgba(168,85,247,0.15); }
+.cat-machines .card-category { color: var(--cat-machines); background: rgba(34,197,94,0.15); }
+.cat-projects .card-category { color: var(--cat-projects); background: rgba(249,115,22,0.15); }
+.cat-company .card-category { color: var(--cat-company); background: rgba(234,179,8,0.15); }
 
 .article-header {
   margin: 2.5rem 0 2rem;
@@ -169,7 +204,7 @@ a:hover {
 }
 
 .section-title {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin: 2.5rem 0 0.5rem;
 }
 .muted {
