@@ -24,6 +24,12 @@ const { Content } = await render(article);
       </p>
     </header>
 
+    {article.data.image && (
+      <div class="article-hero">
+        <img src={article.data.image} alt={article.data.title} />
+      </div>
+    )}
+
     <div class="article-body">
       <Content />
     </div>

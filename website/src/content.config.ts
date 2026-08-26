@@ -9,6 +9,7 @@ const articles = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     category: z.enum(["Vegas Loop", "Nashville", "Machines", "Projects", "Company"]),
+    image: z.string().optional(),
     featured: z.boolean().default(false),
     hasVideo: z.boolean().default(false),
     sourceUrl: z.string().url().optional(),
