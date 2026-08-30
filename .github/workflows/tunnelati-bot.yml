@@ -1,10 +1,11 @@
 ﻿name: Tunnelati bot
+
 on:
-  schedule:
-    - cron: "0 6,12,18,0 * * *"
   workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   run-bot:
     runs-on: ubuntu-latest
@@ -13,21 +14,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - name: Install bot
         working-directory: bot
         run: pip install -r requirements.txt
+
       - name: Run Tunnelati bot
         working-directory: bot
         env:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           LIVE_MODE: "true"
+          POSTS_PER_ACCOUNT: "10"
         run: python main.py
+
       - name: Commit new articles to main
+        if: success()
         run: |
           git config user.name "tunnelati-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
