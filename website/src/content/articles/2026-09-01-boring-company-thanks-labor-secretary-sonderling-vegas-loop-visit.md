@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Boring Company thanks Labor Secretary Sonderling for Vegas Loop visit"
 description: "The Boring Company thanked Secretary of Labor Sonderling for visiting Las Vegas to see progress on Vegas Loop."
 pubDate: 2026-09-01
@@ -9,6 +9,7 @@ sourceUrl: "https://x.com/boringcompany/status/2094669478848262284"
 author: "Tunnelati"
 draft: false
 category: "Vegas Loop"
+image: "/images/articles/2026-09-01-boring-company-thanks-labor-secretary-sonderling-vegas-loop-visit.jpg"
 ---
 
 The Boring Company thanked Secretary of Labor Sonderling for visiting Las Vegas to see progress on Vegas Loop.
