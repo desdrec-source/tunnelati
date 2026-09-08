@@ -12,6 +12,8 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
+const sourceUrl = article.data.sourceUrl || "";
+const isXSource = /https?:\/\/(?:www\.)?(?:x\.com|twitter\.com)\//i.test(sourceUrl);
 ---
 <BaseLayout title={article.data.title} description={article.data.description}>
   <article>
@@ -24,7 +26,22 @@ const { Content } = await render(article);
       </p>
     </header>
 
-    {article.data.image && (
+    {article.data.hasVideo && isXSource && (
+      <div class="article-embed">
+        <blockquote class="twitter-tweet" data-media-max-width="560" data-theme="dark">
+          <a href={sourceUrl}></a>
+        </blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+    )}
+
+    {!article.data.hasVideo && article.data.image && (
+      <div class="article-hero">
+        <img src={article.data.image} alt={article.data.title} />
+      </div>
+    )}
+
+    {article.data.hasVideo && article.data.image && (
       <div class="article-hero">
         <img src={article.data.image} alt={article.data.title} />
       </div>

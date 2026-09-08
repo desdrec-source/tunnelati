@@ -13,6 +13,8 @@ category: "Nashville"
 
 The Boring Company posted drone footage on X showing Prufrock-MB1 and Prufrock-MB2 tunneling simultaneously in Nashville.
 
+The official video is embedded above from the source post.
+
 > Drone footage of Prufrock-MB1 and Prufrock-MB2 tunneling simultaneously in Nashville.  
 >  
 > The 10,000+ psi limestone is transported from each boring machine via a continuous conveyor belt, completing its journey to the rock pit via the 2 vertically stacked side belts seen below.
