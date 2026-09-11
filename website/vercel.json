@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/articles/prufrock-autonomous-rings-2026-08-08",
+      "destination": "/articles/2026-08-08-boring-company-details-prufrock-autonomous-ring-placement",
+      "permanent": true
+    },
+    {
+      "source": "/articles/prufrock-autonomous-rings-2026-08-08/",
+      "destination": "/articles/2026-08-08-boring-company-details-prufrock-autonomous-ring-placement",
+      "permanent": true
+    }
+  ]
+}

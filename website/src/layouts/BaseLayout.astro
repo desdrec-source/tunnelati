@@ -6,22 +6,34 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Independent high-signal coverage of The Boring Company" } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const {
+  title,
+  description = "Dated official The Boring Company posts, sourced from @boringcompany and boringcompany.com. Short briefs only. No invented details.",
+} = Astro.props;
+
+const siteTitle =
+  title === "Tunnelati" || title === "Home"
+    ? "Tunnelati - The Boring Company news"
+    : `${title} | Tunnelati`;
+
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, "") || "/", Astro.site);
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | Tunnelati</title>
+    <title>{siteTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta property="og:title" content={`${title} | Tunnelati`} />
+    <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Tunnelati" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
