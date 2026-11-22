@@ -1,5 +1,5 @@
 ---
-title: Boring Company: Prufrock-MB3 is alive in Nashville and will tunnel by end of month
+title: "Boring Company: Prufrock-MB3 is alive in Nashville and will tunnel by end of month"
 description: Official post states Prufrock-MB3 is alive in Nashville with one week of commissioning, will be tunneling by end of month, shows two of four grippers each pushing ~1 million pounds laterally, and notes Prufrock-MB4 arrives in December to tunnel in January.
 pubDate: 2026-11-22
 sourceName: "@boringcompany on X"
